@@ -10,12 +10,12 @@ class stblock
         // rotate block
         void rotate();
         // get block
-        void get_block(bool* block);
+        void get_block(int** block);
 
     private:
         // block number
         int m_no;
         // blocks
-        bool m_block[MAX_BLOCK_Y][MAX_BLOCK_X];
+        int m_block[MAX_BLOCK_Y][MAX_BLOCK_X];
 };
 
