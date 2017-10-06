@@ -1,8 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 int main()
 {
-    printf("s-tetris");
+    // initialize random seed
+    srand(time(NULL));
+
     return 0;
 }
 

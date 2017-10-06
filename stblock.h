@@ -1,21 +1,27 @@
-#define MAX_BLOCK_CNT 7
-#define MAX_BLOCK_X 4
-#define MAX_BLOCK_Y 4
-
 class stblock
 {
     public:
         // constructor
-        stblock(int no);
-        // rotate block
+        stblock(int number);
+        // rotate
         void rotate();
-        // get block
-        void get_block(int** block);
+        // operator []
+        int* operator[](int x);
+        // get X size
+        int getXSize();
+        // get Y size
+        int getYSize();
 
     private:
         // block number
-        int m_no;
-        // blocks
-        int m_block[MAX_BLOCK_Y][MAX_BLOCK_X];
+        int m_number;
+        // X size
+        int m_x_size;
+        // X size
+        int m_y_size;
+        // rotation
+        int m_rotation;
+        // block
+        int*** m_block;
 };
 
