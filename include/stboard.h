@@ -1,4 +1,7 @@
-#include <stblock.h>
+#ifndef __STBOARD_H__
+#define __STBOARD_H__
+
+#include "stblock.h"
 
 #define MAX_BOARD_X 10
 #define MAX_BOARD_Y 20
@@ -20,3 +23,4 @@ class stboard
         int m_board[MAX_BOARD_X][MAX_BOARD_Y];
 };
 
+#endif

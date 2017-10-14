@@ -1,5 +1,5 @@
-#include <string.h>
-#include <stboard.h>
+#include "../include/stboard.h"
+
 
 // constructor
 stboard::stboard()
@@ -10,7 +10,13 @@ stboard::stboard()
 // clear
 void stboard::clear()
 {
-    memset(m_board, 0, MAX_BOARD_X * MAX_BOARD_Y);
+	for (int x = 0; x < MAX_BOARD_X; x++)
+	{
+		for (int y = 0; y < MAX_BOARD_Y; y++)
+		{
+			m_board[x][y] = 0;
+		}
+	}
 }
 
 // check block

@@ -1,6 +1,6 @@
-#include <stblock.h>
-#include <stblocks.h>
-#include <string.h>
+#include "../include/stblock.h"
+#include "../include/stblocks.h"
+
 
 // constructor
 stblock::stblock(int number)
@@ -35,4 +35,3 @@ int stblock::getYSize()
 {
     return m_y_size;
 }
-

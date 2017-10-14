@@ -1,3 +1,6 @@
+#ifndef __STBLOCK_H__
+#define __STBLOCK_H__
+
 class stblock
 {
     public:
@@ -25,3 +28,4 @@ class stblock
         int*** m_block;
 };
 
+#endif 

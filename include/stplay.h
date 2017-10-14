@@ -1,5 +1,8 @@
-#include <stblock.h>
-#include <stboard.h>
+#ifndef __STPLAY_H__
+#define __STPLAY_H__
+
+#include "stblock.h"
+#include "stboard.h"
 
 class stplay
 {
@@ -50,4 +53,6 @@ class stplay
         // next block
         stblock m_nextBlock;
 };
+
+#endif
 

@@ -1,7 +1,8 @@
-#include <stplay.h>
-#include <stblocks.h>
+#include "../include/stplay.h"
+#include "../include/stblocks.h"
 #include <stdlib.h>
 #include <time.h>
+
 
 // constructor
 stplay::stplay()
@@ -9,7 +10,7 @@ stplay::stplay()
     m_nextBlock(rand() % MAX_BLOCK_CNT)
 {
     // initialize random seed
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
 
     // block
     m_block = 0;

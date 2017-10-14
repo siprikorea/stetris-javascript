@@ -1,4 +1,4 @@
-#include <stview.h>
+#include "../include/stview.h"
 
 
 // constructor

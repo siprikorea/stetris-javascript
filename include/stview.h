@@ -1,4 +1,7 @@
-#include <stplay.h>
+#ifndef __STVIEW_H__
+#define __STVIEW_H__
+
+#include "stplay.h"
 
 class stview
 {
@@ -14,3 +17,4 @@ class stview
         void drawNextBlock();
 };
 
+#endif
