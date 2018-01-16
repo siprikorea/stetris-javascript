@@ -3,24 +3,34 @@
 
 #include "stblock.h"
 
-#define MAX_BOARD_X 10
-#define MAX_BOARD_Y 20
+#define ST_MAX_BOARD_X 10
+#define ST_MAX_BOARD_Y 20
 
-class stboard
+class CStBoard
 {
-    public:
-        // constructor
-        stboard();
-        // clear
-        void clear();
-        // check block
-        bool checkBlock(int x, int y, stblock* block);
-        // set block
-        void setBlock(int x, int y, stblock* block);
+public:
+    // Constructor
+    CStBoard();
 
-    private:
-        // board
-        int m_board[MAX_BOARD_X][MAX_BOARD_Y];
+    // Clear
+    void Clear();
+
+    // Get X size
+    int GetXSize();
+    // Get Y size
+    int GetYSize();
+    // Get value
+    int GetValue(int nX, int nY);
+    // Set value
+    void SetValue(int nX, int nY, int nValue);
+
+private:
+    // X Size
+    int m_XSize;
+    // Y Size
+    int m_YSize;
+    // Board
+    int m_Board[ST_MAX_BOARD_X][ST_MAX_BOARD_Y];
 };
 
 #endif

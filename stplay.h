@@ -4,54 +4,39 @@
 #include "stblock.h"
 #include "stboard.h"
 
-class stplay
+class CStPlay
 {
-    public:
-        // constructor
-        stplay();
+public:
+    // Constructor
+    CStPlay();
 
-        // start
-        void start();
-        // stop
-        void stop();
-        // pause
-        void pause();
-        // resume
-        void resume();
+    // Start
+    void Start();
+    // Stop
+    void Stop();
+    // Pause
+    void Pause();
+    // Resume
+    void Resume();
 
-        // move left
-        void moveLeft();
-        // move right
-        void moveRight();
-        // move down
-        void moveDown();
-        // rotate
-        void rotate();
-        // drop
-        void drop();
+    // Move left
+    void MoveLeft();
+    // Move right
+    void MoveRight();
+    // Move down
+    void MoveDown();
+    // Rotate
+    void Rotate();
+    // Drop
+    void Drop();
 
-        // get board
-        void getBoard(stboard* board);
-        // get block X pos
-        int getBlockXPos();
-        // get block Y pos
-        int getBlockYPos();
-        // get block
-        void getBlock(stblock* block);
-        // get next block
-        void getNextBlock(stblock* block);
-
-    private:
-        // board
-        stboard m_board;
-        // block
-        stblock m_block;
-        // block X position
-        int m_blockXPos;
-        // block Y position
-        int m_blockYPos;
-        // next block
-        stblock m_nextBlock;
+private:
+    // Board
+    CStBoard m_Board;
+    // Current Block
+    CStBlock m_CurrentBlock;
+    // Next Block
+    CStBlock m_NextBlock;
 };
 
 #endif

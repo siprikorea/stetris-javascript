@@ -1,8 +1,7 @@
 #include "../include/stblocks.h"
 
-
-// block informations
-ST_BLOCK stblocks[MAX_BLOCK_CNT] = {
+// blocks
+ST_BLOCK g_StBlocks[ST_MAX_BLOCK_CNT] = {
 	{
 		3, 3,
 		{

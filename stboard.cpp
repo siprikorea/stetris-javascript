@@ -1,57 +1,49 @@
 #include "../include/stboard.h"
 
-
-// constructor
-stboard::stboard()
+// Constructor
+CStBoard::CStBoard()
 {
-    clear();
+    // X Size
+    m_XSize = ST_MAX_BOARD_X;
+    // Y Size
+    m_YSize = ST_MAX_BOARD_Y;
+    // Clear
+    Clear();
 }
 
-// clear
-void stboard::clear()
+// Clear
+void CStBoard::Clear()
 {
-	for (int x = 0; x < MAX_BOARD_X; x++)
+	for (int x = 0; x < m_XSize; x++)
 	{
-		for (int y = 0; y < MAX_BOARD_Y; y++)
+		for (int y = 0; y < m_YSize; y++)
 		{
-			m_board[x][y] = 0;
+			m_Board[x][y] = 0;
 		}
 	}
 }
 
-// check block
-bool stboard::checkBlock(int x, int y, stblock* block)
+// Get X size
+int CStBoard::GetXSize()
 {
-    for (int xCnt = 0; xCnt < block->getXSize(); xCnt++)
-    {
-        for (int yCnt = 0; yCnt < block->getYSize(); yCnt++)
-        {
-            if (*block[xCnt][yCnt])
-            {
-                if ((x + xCnt) >= MAX_BOARD_X || (y + yCnt) >= MAX_BOARD_Y)
-                {
-                    return false;
-                }
-                if (m_board[x + xCnt] || m_board[y + yCnt])
-                {
-                    return false;
-                }
-            }
-        }
-    }
-
-    return true;
+    return m_XSize;
 }
 
-// set block
-void stboard::setBlock(int x, int y, stblock* block)
+// Get Y size
+int CStBoard::GetYSize()
 {
-    for (int xCnt = 0; xCnt < block->getXSize(); xCnt++)
-    {
-        for (int yCnt = 0; yCnt < block->getYSize(); yCnt++)
-        {
-            m_board[x + xCnt][y + yCnt] = *block[xCnt][yCnt];
-        }
-    }
+    return m_YSize;
+}
+
+// Get value
+int CStBoard::GetValue(int nX, int nY)
+{
+    return m_Board[nX][nY];
+}
+
+// Set value
+void CStBoard::SetValue(int nX, int nY, int nValue)
+{
+    m_Board[nX][nY] = nValue;
 }
 

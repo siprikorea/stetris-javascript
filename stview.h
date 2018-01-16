@@ -8,13 +8,15 @@ class stview
     public:
         // constructor
         stview();
+        // destructor
+        virtual ~stview();
         
         // draw board
-        void drawBoard();
+        virtual void drawBoard();
         // draw block
-        void drawBlock();
+        virtual void drawBlock();
         // draw next block
-        void drawNextBlock();
+        virtual void drawNextBlock();
 };
 
 #endif
