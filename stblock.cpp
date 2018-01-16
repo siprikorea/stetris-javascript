@@ -1,13 +1,13 @@
-#include "../include/stblock.h"
-#include "../include/stblocks.h"
 #include <stdlib.h>
 #include <string.h>
+#include "stblock.h"
+#include "stblocks.h"
 
 // constructor
-CStBlock::CStBlock(CStBoard* pBoard)
+CStBlock::CStBlock()
 {
     // Board
-    m_pBoard = pBoard;
+    m_pBoard = NULL;
     // Type
     m_Type = rand() % ST_MAX_BLOCK_CNT;
     // X Size
@@ -32,6 +32,12 @@ CStBlock::CStBlock(CStBoard* pBoard)
     memcpy(m_TempBlock, &g_StBlocks[m_Type].block[m_TempRotation], sizeof(m_TempBlock));
 }
 
+// Set board
+int CStBlock::SetBoard(CStBoard* pBoard)
+{
+    m_pBoard = pBoard;
+}
+
 // Get type
 int CStBlock::GetType()
 {
@@ -51,7 +57,7 @@ int CStBlock::GetYSize()
 }
 
 // Rotate
-void CStBlock::Rotate()
+bool CStBlock::Rotate()
 {
     // Set temp rotation
     m_TempRotation = m_CurrentRotation + 1;
@@ -65,11 +71,16 @@ void CStBlock::Rotate()
         m_CurrentRotation = m_CurrentRotation + 1;
         // Set current block
         memcpy(m_CurrentBlock, m_TempBlock, sizeof(m_CurrentBlock));
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 // Move left
-void CStBlock::MoveLeft()
+bool CStBlock::MoveLeft()
 {
     // Set temp X position
     m_TempXPos = m_CurrentXPos - 1;
@@ -81,11 +92,16 @@ void CStBlock::MoveLeft()
     {
         // Set current X position
         m_CurrentXPos = m_CurrentXPos - 1;
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 // Move right
-void CStBlock::MoveRight()
+bool CStBlock::MoveRight()
 {
     // Set temp X position
     m_TempXPos = m_CurrentXPos + 1;
@@ -97,11 +113,16 @@ void CStBlock::MoveRight()
     {
         // Set current X position
         m_CurrentXPos = m_CurrentXPos + 1;
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 // Move down
-void CStBlock::MoveDown()
+bool CStBlock::MoveDown()
 {
     // Set temp Y position
     m_TempYPos = m_CurrentYPos + 1;
@@ -113,6 +134,11 @@ void CStBlock::MoveDown()
     {
         // Set current Y position
         m_CurrentYPos = m_CurrentYPos + 1;
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

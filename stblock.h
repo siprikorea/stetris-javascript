@@ -11,8 +11,10 @@ class CStBlock
 {
 public:
     // Constructor
-    CStBlock(CStBoard* pBoard);
+    CStBlock();
 
+    // Set board
+    int SetBoard(CStBoard* pBoard);
     // Get type
     int GetType();
     // Get X size
@@ -21,13 +23,13 @@ public:
     int GetYSize();
 
     // Rotate
-    void Rotate();
+    bool Rotate();
     // Move left
-    void MoveLeft();
+    bool MoveLeft();
     // Move right
-    void MoveRight();
+    bool MoveRight();
     // Move down
-    void MoveDown();
+    bool MoveDown();
     // Drop
     void Drop();
     

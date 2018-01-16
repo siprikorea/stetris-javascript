@@ -3,20 +3,14 @@
 
 #include "stplay.h"
 
-class stview
+class CStView
 {
-    public:
-        // constructor
-        stview();
-        // destructor
-        virtual ~stview();
-        
-        // draw board
-        virtual void drawBoard();
-        // draw block
-        virtual void drawBlock();
-        // draw next block
-        virtual void drawNextBlock();
+public:
+    // Constructor
+    CStView();
+    
+    // Update view
+    virtual void UpdateView();
 };
 
 #endif

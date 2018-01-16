@@ -1,4 +1,4 @@
-#include "../include/stboard.h"
+#include "stboard.h"
 
 // Constructor
 CStBoard::CStBoard()

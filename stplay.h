@@ -3,12 +3,13 @@
 
 #include "stblock.h"
 #include "stboard.h"
+#include "stview.h"
 
 class CStPlay
 {
 public:
     // Constructor
-    CStPlay();
+    CStPlay(CStView* pView);
 
     // Start
     void Start();
@@ -31,6 +32,8 @@ public:
     void Drop();
 
 private:
+    // View
+    CStView* m_pView;
     // Board
     CStBoard m_Board;
     // Current Block

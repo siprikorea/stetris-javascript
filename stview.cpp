@@ -1,23 +1,12 @@
-#include "../include/stview.h"
+#include "stview.h"
 
-
-// constructor
-stview::stview()
+// Constructor
+CStView::CStView()
 {
 }
 
-// draw board
-void stview::drawBoard()
-{
-}
-
-// draw block
-void stview::drawBlock()
-{
-}
-
-// draw next block
-void stview::drawNextBlock()
+// Update View
+void CStView::UpdateView()
 {
 }
 

@@ -1,4 +1,4 @@
-#include "../include/stblocks.h"
+#include "stblocks.h"
 
 // blocks
 ST_BLOCK g_StBlocks[ST_MAX_BLOCK_CNT] = {

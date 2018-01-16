@@ -4,7 +4,7 @@
 
 int main()
 {
-    // initialize random seed
+    // Initialize random seed
     srand(time(NULL));
 
     return 0;
