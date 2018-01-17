@@ -9,4 +9,3 @@ CStView::CStView()
 void CStView::UpdateView()
 {
 }
-

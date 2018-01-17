@@ -12,26 +12,6 @@ CStPlay::CStPlay(CStView* pView)
     m_CurrentBlock.SetBoard(&m_Board);
 }
 
-// Start
-void CStPlay::Start()
-{
-}
-
-// Stop
-void CStPlay::Stop()
-{
-}
-
-// Pause
-void CStPlay::Pause()
-{
-}
-
-// Resume
-void CStPlay::Resume()
-{
-}
-
 // Move left
 void CStPlay::MoveLeft()
 {
@@ -88,3 +68,20 @@ void CStPlay::Drop()
     m_pView->UpdateView();
 }
 
+// Get board
+CStBoard* CStPlay::GetBoard()
+{
+	return &m_Board;
+}
+
+// Get current block
+CStBlock* CStPlay::GetCurrentBlock()
+{
+	return &m_CurrentBlock;
+}
+
+// Get next block
+CStBlock* CStPlay::GetNextBlock()
+{
+	return &m_NextBlock;
+}

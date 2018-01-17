@@ -14,13 +14,19 @@ public:
     CStBlock();
 
     // Set board
-    int SetBoard(CStBoard* pBoard);
+    void SetBoard(CStBoard* pBoard);
     // Get type
     int GetType();
     // Get X size
     int GetXSize();
     // Get Y size
     int GetYSize();
+    // Get X position
+    int GetXPos();
+    // Get Y position
+    int GetYPos();
+	// Get block
+	int GetBlock(int nX, int nY);
 
     // Rotate
     bool Rotate();

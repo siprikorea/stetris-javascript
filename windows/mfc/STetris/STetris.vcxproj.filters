@@ -1,103 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="tetris">
+    <Filter Include="1.Model">
       <UniqueIdentifier>{808608af-d7e0-4ed4-ab4f-0cea3307d81a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tetris\include">
-      <UniqueIdentifier>{46ab2a2a-7448-43c7-b37a-d11674744922}</UniqueIdentifier>
+    <Filter Include="2.View">
+      <UniqueIdentifier>{6beefe62-9fb4-4203-b487-b706e042929c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tetris\source">
-      <UniqueIdentifier>{cfe67e43-6320-4af7-8604-06f63cfafdf1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view">
+    <Filter Include="3.Presentation">
       <UniqueIdentifier>{61a1a839-a621-4b9b-a32f-4991cd0fe234}</UniqueIdentifier>
     </Filter>
-    <Filter Include="view\include">
-      <UniqueIdentifier>{91bdf8a0-a788-4cf1-8f8b-c9151b5e1559}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\source">
-      <UniqueIdentifier>{7c10ad89-17e0-47ce-b851-1d3a21afb59a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\resource">
+    <Filter Include="3.Presentation\Resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>view\include</Filter>
+    <ClInclude Include="..\..\..\stblock.h">
+      <Filter>1.Model</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>view\include</Filter>
+    <ClInclude Include="..\..\..\stblocks.h">
+      <Filter>1.Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\stboard.h">
+      <Filter>1.Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\stplay.h">
+      <Filter>1.Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\stview.h">
+      <Filter>2.View</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>view\include</Filter>
+      <Filter>3.Presentation</Filter>
     </ClInclude>
     <ClInclude Include="STetris.h">
-      <Filter>view\include</Filter>
+      <Filter>3.Presentation</Filter>
     </ClInclude>
     <ClInclude Include="STetrisDlg.h">
-      <Filter>view\include</Filter>
+      <Filter>3.Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\include\stblocks.h">
-      <Filter>tetris\include</Filter>
+    <ClInclude Include="targetver.h">
+      <Filter>3.Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\include\stboard.h">
-      <Filter>tetris\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\include\stplay.h">
-      <Filter>tetris\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\include\stview.h">
-      <Filter>tetris\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\include\stblock.h">
-      <Filter>tetris\include</Filter>
+    <ClInclude Include="Resource.h">
+      <Filter>3.Presentation\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>view\source</Filter>
-    </ClCompile>
-    <ClCompile Include="STetris.cpp">
-      <Filter>view\source</Filter>
-    </ClCompile>
-    <ClCompile Include="STetrisDlg.cpp">
-      <Filter>view\source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\stblock.cpp">
-      <Filter>tetris\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\stboard.cpp">
-      <Filter>tetris\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\stplay.cpp">
-      <Filter>tetris\source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\stview.cpp">
-      <Filter>tetris\source</Filter>
+      <Filter>1.Model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\stblocks.cpp">
-      <Filter>tetris\source</Filter>
+      <Filter>1.Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\stboard.cpp">
+      <Filter>1.Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\stplay.cpp">
+      <Filter>1.Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\stview.cpp">
+      <Filter>2.View</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>3.Presentation</Filter>
+    </ClCompile>
+    <ClCompile Include="STetris.cpp">
+      <Filter>3.Presentation</Filter>
+    </ClCompile>
+    <ClCompile Include="STetrisDlg.cpp">
+      <Filter>3.Presentation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="STetris.rc">
-      <Filter>view\resource</Filter>
+      <Filter>3.Presentation\Resource</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\STetris.rc2">
-      <Filter>view\resource</Filter>
+      <Filter>3.Presentation\Resource</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\STetris.ico">
-      <Filter>view\resource</Filter>
+      <Filter>3.Presentation\Resource</Filter>
     </Image>
     <Image Include="res\stetris_block.bmp">
-      <Filter>view\resource</Filter>
+      <Filter>3.Presentation\Resource</Filter>
     </Image>
   </ItemGroup>
 </Project>

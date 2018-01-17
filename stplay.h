@@ -11,15 +11,6 @@ public:
     // Constructor
     CStPlay(CStView* pView);
 
-    // Start
-    void Start();
-    // Stop
-    void Stop();
-    // Pause
-    void Pause();
-    // Resume
-    void Resume();
-
     // Move left
     void MoveLeft();
     // Move right
@@ -30,6 +21,13 @@ public:
     void Rotate();
     // Drop
     void Drop();
+
+	// Get board
+	CStBoard* GetBoard();
+	// Get current block
+	CStBlock* GetCurrentBlock();
+	// Get next block
+	CStBlock* GetNextBlock();
 
 private:
     // View

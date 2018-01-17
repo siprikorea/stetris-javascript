@@ -1,8 +1,6 @@
 #ifndef __STBOARD_H__
 #define __STBOARD_H__
 
-#include "stblock.h"
-
 #define ST_MAX_BOARD_X 10
 #define ST_MAX_BOARD_Y 20
 

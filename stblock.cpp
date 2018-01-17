@@ -1,11 +1,15 @@
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "stblock.h"
 #include "stblocks.h"
 
-// constructor
+// Constructor
 CStBlock::CStBlock()
 {
+    // Initialize random seed
+    srand((unsigned int)time(NULL));
+
     // Board
     m_pBoard = NULL;
     // Type
@@ -33,7 +37,7 @@ CStBlock::CStBlock()
 }
 
 // Set board
-int CStBlock::SetBoard(CStBoard* pBoard)
+void CStBlock::SetBoard(CStBoard* pBoard)
 {
     m_pBoard = pBoard;
 }
@@ -54,6 +58,24 @@ int CStBlock::GetXSize()
 int CStBlock::GetYSize()
 {
     return m_YSize;
+}
+
+// Get X position
+int CStBlock::GetXPos()
+{
+    return m_CurrentXPos;
+}
+
+// Get Y position
+int CStBlock::GetYPos()
+{
+    return m_CurrentYPos;
+}
+
+// Get block
+int CStBlock::GetBlock(int nX, int nY)
+{
+    return m_CurrentBlock[nY][nX];
 }
 
 // Rotate
@@ -218,4 +240,3 @@ bool CStBlock::CheckForMovement()
 
     return true;
 }
-

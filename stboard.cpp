@@ -46,4 +46,3 @@ void CStBoard::SetValue(int nX, int nY, int nValue)
 {
     m_Board[nX][nY] = nValue;
 }
-

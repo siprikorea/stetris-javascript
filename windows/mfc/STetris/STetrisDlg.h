@@ -1,6 +1,9 @@
 #pragma once
 
-class CSTetrisDlg : public CDialog
+#include "../../../stview.h"
+#include "../../../stplay.h"
+
+class CSTetrisDlg : public CDialog, public CStView
 {
 public:
 	// Constructor
@@ -9,6 +12,9 @@ public:
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_STETRIS_DIALOG };
 #endif
+
+    // Update view
+    virtual void UpdateView();
 
 protected:
 	// DDX/DDV support
@@ -24,15 +30,21 @@ protected:
 
 	// Draw icon
 	void DrawIcon(CDC* pDC);
-	// Draw tetris
-	void DrawTetris(CDC* pDC);
+	// Draw all
+	void DrawAll(CDC* pDC);
+	// Draw background
+	void DrawBackground(CDC* pDC, CRect* pRect);
 	// Draw board
 	void DrawBoard(CDC* pDC, CRect* pRect);
+	// Draw current block
+	void DrawCurrentBlock(CDC* pDC, CRect* pRect);
 	// Draw next block
 	void DrawNextBlock(CDC* pDC, CRect* pRect);
 	// Draw score
 	void DrawScore(CDC* pDC, CRect* pRect);
+
 protected:
 	HICON m_hIcon;
-
+	// Play
+	CStPlay m_Play;
 };
