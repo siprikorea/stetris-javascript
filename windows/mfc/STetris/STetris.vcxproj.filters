@@ -90,5 +90,11 @@
     <Image Include="res\stetris_block.bmp">
       <Filter>3.Presentation\Resource</Filter>
     </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>3.Presentation\Resource</Filter>
+    </Image>
+    <Image Include="res\stetris_background.jpg">
+      <Filter>3.Presentation\Resource</Filter>
+    </Image>
   </ItemGroup>
 </Project>

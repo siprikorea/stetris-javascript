@@ -13,7 +13,7 @@ CStBlock::CStBlock()
     // Board
     m_pBoard = NULL;
     // Type
-    m_Type = rand() % ST_MAX_BLOCK_CNT;
+    m_Type = rand() % ST_MAX_BLOCK_CNT + 1;
     // X Size
     m_XSize = g_StBlocks[m_Type].x_size;
     // Y Size

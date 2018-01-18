@@ -44,7 +44,12 @@ protected:
 	void DrawScore(CDC* pDC, CRect* pRect);
 
 protected:
+	// Icon
 	HICON m_hIcon;
+	// Background
+	CBitmap m_Background;
+	// Block images
+	CBitmap m_BlockImages;
 	// Play
 	CStPlay m_Play;
 };

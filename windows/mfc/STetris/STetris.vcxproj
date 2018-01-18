@@ -215,7 +215,9 @@
     <None Include="res\STetris.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\STetris.ico" />
+    <Image Include="res\stetris_background.jpg" />
     <Image Include="res\stetris_block.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
