@@ -40,7 +40,7 @@ public:
     void Drop();
     
     // Check for movement
-    bool CheckForMovement();
+    bool CheckForMovement(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X]);
 
 protected:
     // Board
@@ -51,22 +51,14 @@ protected:
     int m_XSize;
     // Y size
     int m_YSize;
-    // Current X position
-    int m_CurrentXPos;
-    // Current Y position
-    int m_CurrentYPos;
-    // Current rotation
-    int m_CurrentRotation;
-    // Current block
-    int m_CurrentBlock[ST_MAX_BLOCK_X][ST_MAX_BLOCK_Y];
-    // Temp X position
-    int m_TempXPos;
-    // Temp Y position
-    int m_TempYPos;
-    // Temp rotation
-    int m_TempRotation;
-    // Temp block
-    int m_TempBlock[ST_MAX_BLOCK_X][ST_MAX_BLOCK_Y];
+    // X position
+    int m_XPos;
+    // Y position
+    int m_YPos;
+    // Rotation
+    int m_Rotation;
+    // Block
+    int m_Block[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X];
 };
 
 #endif 

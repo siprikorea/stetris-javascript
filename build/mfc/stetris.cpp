@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "STetris.h"
-#include "STetrisDlg.h"
+#include "stetris.h"
+#include "stetrisdlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

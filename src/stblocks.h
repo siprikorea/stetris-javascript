@@ -10,7 +10,7 @@
 typedef struct _ST_BLOCK {
     int x_size;
     int y_size;
-    int block[ST_MAX_BLOCK_ROT][ST_MAX_BLOCK_X][ST_MAX_BLOCK_Y];
+    int block[ST_MAX_BLOCK_ROT][ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X];
 } ST_BLOCK, *PST_BLOCK;
 
 // blocks

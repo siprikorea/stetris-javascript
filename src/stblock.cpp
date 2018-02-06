@@ -4,7 +4,10 @@
 #include "stblock.h"
 #include "stblocks.h"
 
-// Constructor
+/************************************************************
+ *	@brief		Constructor
+ *	@retval		Nothing
+ ************************************************************/
 CStBlock::CStBlock()
 {
     // Initialize random seed
@@ -13,86 +16,103 @@ CStBlock::CStBlock()
     // Board
     m_pBoard = NULL;
     // Type
-    m_Type = rand() % ST_MAX_BLOCK_CNT + 1;
+    m_Type = (rand() % ST_MAX_BLOCK_CNT) + 1;
     // X Size
-    m_XSize = g_StBlocks[m_Type].x_size;
+    m_XSize = g_StBlocks[m_Type-1].x_size;
     // Y Size
-    m_YSize = g_StBlocks[m_Type].y_size;
-    // Current X Position
-    m_CurrentXPos = 0;
-    // Current Y Position
-    m_CurrentYPos = 0;
-    // Current Rotation
-    m_CurrentRotation = 0;
-    // Current Block
-    memcpy(m_CurrentBlock, &g_StBlocks[m_Type].block[m_CurrentRotation], sizeof(m_CurrentBlock));
-    // Temp X Position
-    m_TempXPos = 0;
-    // Temp Y Position
-    m_TempYPos = 0;
-    // Temp Rotation
-    m_TempRotation = 0;
-    // Temp Block
-    memcpy(m_TempBlock, &g_StBlocks[m_Type].block[m_TempRotation], sizeof(m_TempBlock));
+    m_YSize = g_StBlocks[m_Type-1].y_size;
+    // X Position
+    m_XPos = 0;
+    // Y Position
+    m_YPos = 0;
+    // Rotation
+    m_Rotation = 0;
+    // Block
+    memcpy(m_Block, &g_StBlocks[m_Type-1].block[m_Rotation], sizeof(m_Block));
 }
 
-// Set board
+/************************************************************
+ *	@brief		Set block
+ *	@retval		Nothing
+ ************************************************************/
 void CStBlock::SetBoard(CStBoard* pBoard)
 {
     m_pBoard = pBoard;
 }
 
-// Get type
+/************************************************************
+ *	@brief		Get type
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetType()
 {
     return m_Type;
 }
 
-// Get X size
+/************************************************************
+ *	@brief		Get X size
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetXSize()
 {
     return m_XSize;
 }
 
-// Get Y size
+/************************************************************
+ *	@brief		Get Y size
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetYSize()
 {
     return m_YSize;
 }
 
-// Get X position
+/************************************************************
+ *	@brief		Get X position
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetXPos()
 {
-    return m_CurrentXPos;
+    return m_XPos;
 }
 
-// Get Y position
+/************************************************************
+ *	@brief		Get Y position
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetYPos()
 {
-    return m_CurrentYPos;
+    return m_YPos;
 }
 
-// Get block
+/************************************************************
+ *	@brief		Get block
+ *	@retval		Nothing
+ ************************************************************/
 int CStBlock::GetBlock(int nX, int nY)
 {
-    return m_CurrentBlock[nY][nX];
+    return m_Block[nY][nX];
 }
 
-// Rotate
+/************************************************************
+ *	@brief		Rotate
+ *	@retval		Nothing
+ ************************************************************/
 bool CStBlock::Rotate()
 {
     // Set temp rotation
-    m_TempRotation = m_CurrentRotation + 1;
+    int nTempRotation = (m_Rotation + 1) % ST_MAX_BLOCK_ROT;
     // Set temp block
-    memcpy(m_TempBlock, &g_StBlocks[m_Type].block[m_TempRotation], sizeof(m_TempBlock));
+    int TempBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X];
+    memcpy(TempBlock, &g_StBlocks[m_Type-1].block[nTempRotation], sizeof(TempBlock));
 
     // Check for movement
-    if (CheckForMovement())
+    if (CheckForMovement(m_XPos, m_YPos, TempBlock))
     {
         // Set current rotation
-        m_CurrentRotation = m_CurrentRotation + 1;
+        m_Rotation = (m_Rotation + 1) % ST_MAX_BLOCK_ROT;
         // Set current block
-        memcpy(m_CurrentBlock, m_TempBlock, sizeof(m_CurrentBlock));
+        memcpy(m_Block, TempBlock, sizeof(m_Block));
         return true;
     }
     else
@@ -101,19 +121,17 @@ bool CStBlock::Rotate()
     }
 }
 
-// Move left
+/************************************************************
+ *	@brief		Move left
+ *	@retval		Nothing
+ ************************************************************/
 bool CStBlock::MoveLeft()
 {
-    // Set temp X position
-    m_TempXPos = m_CurrentXPos - 1;
-    // Set current block
-    memcpy(m_TempBlock, m_CurrentBlock, sizeof(m_TempBlock));
-
     // Check for movement
-    if (CheckForMovement())
+    if (CheckForMovement(m_XPos - 1, m_YPos, m_Block))
     {
         // Set current X position
-        m_CurrentXPos = m_CurrentXPos - 1;
+        m_XPos = m_XPos - 1;
         return true;
     }
     else
@@ -122,19 +140,17 @@ bool CStBlock::MoveLeft()
     }
 }
 
-// Move right
+/************************************************************
+ *	@brief		Move right
+ *	@retval		Nothing
+ ************************************************************/
 bool CStBlock::MoveRight()
 {
-    // Set temp X position
-    m_TempXPos = m_CurrentXPos + 1;
-    // Set current block
-    memcpy(m_TempBlock, m_CurrentBlock, sizeof(m_TempBlock));
-
     // Check for movement
-    if (CheckForMovement())
+    if (CheckForMovement(m_XPos + 1, m_YPos, m_Block))
     {
         // Set current X position
-        m_CurrentXPos = m_CurrentXPos + 1;
+        m_XPos = m_XPos + 1;
         return true;
     }
     else
@@ -143,19 +159,17 @@ bool CStBlock::MoveRight()
     }
 }
 
-// Move down
+/************************************************************
+ *	@brief		Move down
+ *	@retval		Nothing
+ ************************************************************/
 bool CStBlock::MoveDown()
 {
-    // Set temp Y position
-    m_TempYPos = m_CurrentYPos + 1;
-    // Set current block
-    memcpy(m_TempBlock, m_CurrentBlock, sizeof(m_TempBlock));
-
     // Check for movement
-    if (CheckForMovement())
+    if (CheckForMovement(m_XPos, m_YPos + 1, m_Block))
     {
         // Set current Y position
-        m_CurrentYPos = m_CurrentYPos + 1;
+        m_YPos = m_YPos + 1;
         return true;
     }
     else
@@ -164,21 +178,19 @@ bool CStBlock::MoveDown()
     }
 }
 
-// Drop
+/************************************************************
+ *	@brief		Drop
+ *	@retval		Nothing
+ ************************************************************/
 void CStBlock::Drop()
 {
     while (1)
     {
-        // Set temp Y position
-        m_TempYPos = m_CurrentYPos + 1;
-        // Set current block
-        memcpy(m_TempBlock, m_CurrentBlock, sizeof(m_TempBlock));
-
         // Check for movement
-        if (CheckForMovement())
+        if (CheckForMovement(m_XPos, m_YPos + 1, m_Block))
         {
             // Set current Y position
-            m_CurrentYPos = m_CurrentYPos + 1;
+            m_YPos = m_YPos + 1;
         }
         else
         {
@@ -187,51 +199,41 @@ void CStBlock::Drop()
     }
 }
 
-// Check for movement
-bool CStBlock::CheckForMovement()
+/************************************************************
+ *	@brief		Check for movement
+ *	@retval		Nothing
+ ************************************************************/
+bool CStBlock::CheckForMovement(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X])
 {
-    // Get X size of board
+    // Get board size
     int nBoardXSize = m_pBoard->GetXSize();
-    // Get Y size of board
     int nBoardYSize = m_pBoard->GetYSize();
 
-    // Check X position of block
-    if (m_TempXPos < 0 || m_TempXPos > nBoardXSize)
-    {
-        return false;
-    }
-
-    // Check Y position of block
-    if (m_TempYPos < 0 || m_TempYPos > nBoardYSize)
-    {
-        return false;
-    }
-
     // Get value of board
-    for (int nBlockX = 0; nBlockX < m_XSize; nBlockX++)
+    for (int nBlockY = 0; nBlockY < m_YSize; nBlockY++)
     {
-        for (int nBlockY = 0; nBlockY < m_YSize; nBlockY++)
+        for (int nBlockX = 0; nBlockX < m_XSize; nBlockX++)
         {
             // Check if block is empty
-            if (!m_TempBlock[nBlockX][nBlockY])
+            if (!MoveBlock[nBlockY][nBlockX])
             {
                 continue;
             }
 
             // Check X position of block
-            if ((m_TempXPos + nBlockX) < 0 || (m_TempXPos + nBlockX) > nBoardXSize)
+            if ((nMoveX + nBlockX) < 0 || (nMoveX + nBlockX) >= nBoardXSize)
             {
                 return false;
             }
 
             // Check Y position of block
-            if ((m_TempYPos + nBlockY) < 0 || (m_TempYPos + nBlockY) > nBoardYSize)
+            if ((nMoveY + nBlockY) < 0 || (nMoveY + nBlockY) >= nBoardYSize)
             {
                 return false;
             }
 
             // Check if block is already exist
-            if (m_pBoard->GetValue(m_TempXPos + nBlockX, m_TempXPos + nBlockY))
+            if (m_pBoard->GetValue(nMoveX + nBlockX, nMoveY + nBlockY))
             {
                 return false;
             }

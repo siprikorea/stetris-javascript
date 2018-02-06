@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "STetris.h"
-#include "STetrisDlg.h"
+#include "stetris.h"
+#include "stetrisdlg.h"
 #include "afxdialogex.h"
 #include <atlimage.h>
 
@@ -11,24 +11,22 @@
 #define ST_WINDOW_WIDTH			1024
 #define ST_WINDOW_HEIGHT		768
 
+#define ST_BLOCK_WIDTH			30
+#define ST_BLOCK_HEIGHT			30
+
 #define ST_BOARD_POS_X			400
 #define ST_BOARD_POS_Y			30
-#define ST_BOARD_WIDTH			300
-#define ST_BOARD_HEIGHT			600
 
-#define ST_NEXT_BLOCK_POS_X		850
-#define ST_NEXT_BLOCK_POS_Y		200
-#define ST_NEXT_BLOCK_WIDTH		100
-#define ST_NEXT_BLOCK_HEIGHT	100
+#define ST_NEXT_BLOCK_POS_X		750
+#define ST_NEXT_BLOCK_POS_Y		150
 
-#define ST_SCORE_POS_X			850
+#define ST_SCORE_POS_X			750
 #define ST_SCORE_POS_Y			30
-#define ST_SCORE_WIDTH			150
-#define ST_SCORE_HEIGHT			50
 
 BEGIN_MESSAGE_MAP(CSTetrisDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 /************************************************************
@@ -73,6 +71,54 @@ BOOL CSTetrisDlg::OnInitDialog()
 	SetWindowPos(NULL, -1, -1, 1024, 760, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
 
 	return TRUE;
+}
+
+/************************************************************
+ *	@brief		PreTranslateMessage
+ *	@retval		Nothing
+ ************************************************************/
+BOOL CSTetrisDlg::PreTranslateMessage(MSG* pMsg)
+{
+	if (pMsg->message == WM_KEYDOWN)
+	{
+		switch (pMsg->wParam)
+		{
+		case VK_LEFT:
+			m_Play.MoveLeft();
+			break;
+		case VK_RIGHT:
+			m_Play.MoveRight();
+			break;
+		case VK_DOWN:
+			m_Play.MoveDown();
+			break;
+		case VK_UP:
+			m_Play.Rotate();
+			break;
+		case VK_SPACE:
+			m_Play.Drop();
+			break;
+		}
+	}
+
+	return CDialog::PreTranslateMessage(pMsg);
+}
+
+/************************************************************
+ *	@brief		On OK
+ *	@retval		Nothing
+ ************************************************************/
+void CSTetrisDlg::OnOK()
+{
+}
+
+/************************************************************
+ *	@brief		On Cancel
+ *	@retval		Nothing
+ ************************************************************/
+void CSTetrisDlg::OnCancel()
+{
+	CDialog::OnCancel();
 }
 
 /************************************************************
@@ -143,18 +189,21 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
 	DrawBackground(&MemDC, &rect);
 
 	// Draw board
-	CRect boardRect(CPoint(rect.left + ST_BOARD_POS_X, rect.top + ST_BOARD_POS_Y), CSize(ST_BOARD_WIDTH, ST_BOARD_HEIGHT));
+	CRect boardRect(CPoint(rect.left + ST_BOARD_POS_X, rect.top + ST_BOARD_POS_Y),
+		CSize(ST_BLOCK_WIDTH * ST_MAX_BOARD_X, ST_BLOCK_HEIGHT * ST_MAX_BOARD_Y));
 	DrawBoard(&MemDC, &boardRect);
 
 	// Draw current block
-	DrawCurrentBlock(&MemDC, &boardRect);
+	DrawBlock(&MemDC, &boardRect, m_Play.GetCurrentBlock());
 
 	// Draw next block
-	CRect nextBlockRect(CPoint(rect.left + ST_NEXT_BLOCK_POS_X, rect.top + ST_NEXT_BLOCK_POS_Y), CSize(ST_NEXT_BLOCK_WIDTH, ST_NEXT_BLOCK_HEIGHT));
-	DrawNextBlock(&MemDC, &nextBlockRect);
+	CRect nextBlockRect(CPoint(rect.left + ST_NEXT_BLOCK_POS_X, rect.top + ST_NEXT_BLOCK_POS_Y),
+		CSize(ST_BLOCK_WIDTH * ST_MAX_BLOCK_X, ST_BLOCK_HEIGHT * ST_MAX_BLOCK_Y));
+	DrawBlock(&MemDC, &nextBlockRect, m_Play.GetNextBlock());
 
 	// Draw score
-	CRect scoreRect(CPoint(rect.left + ST_SCORE_POS_X, rect.top + ST_SCORE_POS_Y), CSize(ST_SCORE_WIDTH, ST_SCORE_HEIGHT));
+	CRect scoreRect(CPoint(rect.left + ST_SCORE_POS_X, rect.top + ST_SCORE_POS_Y),
+		CSize(ST_BLOCK_WIDTH * 7, ST_BLOCK_HEIGHT * 2));
 	DrawScore(&MemDC, &scoreRect);
 
 	// Bitblt
@@ -195,6 +244,10 @@ void CSTetrisDlg::DrawBoard(CDC * pDC, CRect* pRect)
 	BITMAP bmBlockImages;
 	m_BlockImages.GetBitmap(&bmBlockImages);
 
+	// Get block width and height
+	int nBlockWidth = bmBlockImages.bmHeight;
+	int nBlockHeight = bmBlockImages.bmHeight;
+
 	// Create memory DC
 	CDC MemDC;
 	MemDC.CreateCompatibleDC(pDC);
@@ -209,41 +262,32 @@ void CSTetrisDlg::DrawBoard(CDC * pDC, CRect* pRect)
 	int nXSize = pBoard->GetXSize();
 	int nYSize = pBoard->GetYSize();
 
-	// Get board width and height
-	int nWidth = pRect->Width() / nXSize;
-	int nHeight = pRect->Height() / nYSize;
-
 	// Draw board
-	for (int x = 0; x < nXSize; x++)
+	for (int nBoardY = 0; nBoardY < nYSize; nBoardY++)
 	{
-		for (int y = 0; y < nYSize; y++)
+		for (int nBoardX = 0; nBoardX < nXSize; nBoardX++)
 		{
-			CRect rect(CPoint(pRect->left + x * nWidth, pRect->top + y * nHeight), CSize(nWidth, nHeight));
-			pDC->BitBlt(rect.left, rect.top, bmBlockImages.bmHeight, bmBlockImages.bmHeight, &MemDC, pBoard->GetValue(x, y) * bmBlockImages.bmHeight, 0, SRCCOPY);
+			CRect rect(CPoint(pRect->left + nBoardX * nBlockWidth, pRect->top + nBoardY * nBlockHeight), CSize(nBlockWidth, nBlockHeight));
+			pDC->BitBlt(rect.left, rect.top, nBlockWidth, nBlockHeight, &MemDC, nBlockWidth * pBoard->GetValue(nBoardX, nBoardY), 0, SRCCOPY);
 		}
 	}
 }
 
 /************************************************************
- *	@brief		Draw current block
+ *	@brief		Draw block
  *	@param[in]	pDC				Device context
  *	@param[in]	pRect			Rectangle
+ *	@param[in]	pBlock			Block
  *	@retval		Nothing
  ************************************************************/
-void CSTetrisDlg::DrawCurrentBlock(CDC* pDC, CRect* pRect)
-{
-}
-
-/************************************************************
- *	@brief		Draw next block
- *	@param[in]	pDC				Device context
- *	@param[in]	pRect			Rectangle
- *	@retval		Nothing
- ************************************************************/
-void CSTetrisDlg::DrawNextBlock(CDC * pDC, CRect* pRect)
+void CSTetrisDlg::DrawBlock(CDC* pDC, CRect* pRect, CStBlock* pBlock)
 {
 	BITMAP bmBlockImages;
 	m_BlockImages.GetBitmap(&bmBlockImages);
+
+	// Get block width and height
+	int nBlockWidth = bmBlockImages.bmHeight;
+	int nBlockHeight = bmBlockImages.bmHeight;
 
 	// Create memory DC
 	CDC MemDC;
@@ -252,27 +296,25 @@ void CSTetrisDlg::DrawNextBlock(CDC * pDC, CRect* pRect)
 	// Select block images
 	MemDC.SelectObject(&m_BlockImages);
 
-	// Get next block
-	CStBlock* pBlock = m_Play.GetNextBlock();
+	// Get block size
+	int nXSize = pBlock->GetXSize();
+	int nYSize = pBlock->GetYSize();
 
-	// Get board width and height
-	int nWidth = pRect->Width() / ST_MAX_BLOCK_X;
-	int nHeight = pRect->Height() / ST_MAX_BLOCK_Y;
-
-	// Draw board
-	for (int x = 0; x < ST_MAX_BLOCK_X; x++)
+	// Draw block
+	for (int nBlockY = 0; nBlockY < nYSize; nBlockY++)
 	{
-		for (int y = 0; y < ST_MAX_BLOCK_Y; y++)
+		for (int nBlockX = 0; nBlockX < nXSize; nBlockX++)
 		{
-			if (pBlock->GetBlock(x, y))
+			if (pBlock->GetBlock(nBlockX, nBlockY))
 			{
-				CRect rect(CPoint(pRect->left + x * nWidth, pRect->top + y * nHeight), CSize(nWidth, nHeight));
-				pDC->BitBlt(rect.left, rect.top, bmBlockImages.bmHeight, bmBlockImages.bmHeight, &MemDC, pBlock->GetType() * bmBlockImages.bmHeight, 0, SRCCOPY);
+				int nXPos = pRect->left + (pBlock->GetXPos() + nBlockX) * nBlockWidth;
+				int nYPos = pRect->top + (pBlock->GetYPos() + nBlockY) * nBlockHeight;
+				CRect rect(CPoint(nXPos, nYPos), CSize(nBlockWidth, nBlockHeight));
+				pDC->BitBlt(rect.left, rect.top, nBlockWidth, nBlockHeight, &MemDC, nBlockWidth * pBlock->GetType(), 0, SRCCOPY);
 			}
 		}
 	}
 }
-
 /************************************************************
  *	@brief		Draw score
  *	@param[in]	pDC				Device context

@@ -183,23 +183,25 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\stblock.h" />
-    <ClInclude Include="..\..\..\stblocks.h" />
-    <ClInclude Include="..\..\..\stboard.h" />
-    <ClInclude Include="..\..\..\stplay.h" />
-    <ClInclude Include="..\..\..\stview.h" />
+    <ClInclude Include="..\..\src\stblock.h" />
+    <ClInclude Include="..\..\src\stblocks.h" />
+    <ClInclude Include="..\..\src\stboard.h" />
+    <ClInclude Include="..\..\src\stplay.h" />
+    <ClInclude Include="..\..\src\stview.h" />
+    <ClInclude Include="..\..\src\thread\thread.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stetris.h" />
-    <ClInclude Include="stetrisDlg.h" />
+    <ClInclude Include="stetrisdlg.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\stblock.cpp" />
-    <ClCompile Include="..\..\..\stblocks.cpp" />
-    <ClCompile Include="..\..\..\stboard.cpp" />
-    <ClCompile Include="..\..\..\stplay.cpp" />
-    <ClCompile Include="..\..\..\stview.cpp" />
+    <ClCompile Include="..\..\src\stblock.cpp" />
+    <ClCompile Include="..\..\src\stblocks.cpp" />
+    <ClCompile Include="..\..\src\stboard.cpp" />
+    <ClCompile Include="..\..\src\stplay.cpp" />
+    <ClCompile Include="..\..\src\stview.cpp" />
+    <ClCompile Include="..\..\src\thread\thread_win32.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -207,7 +209,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="stetris.cpp" />
-    <ClCompile Include="stetrisDlg.cpp" />
+    <ClCompile Include="stetrisdlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="stetris.rc" />
@@ -216,12 +218,17 @@
     <None Include="res\stetris.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\stetris.ico" />
+    <Image Include="res\stetris_background.bmp" />
     <Image Include="res\stetris_background.jpg" />
     <Image Include="res\stetris_block.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="stetris.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

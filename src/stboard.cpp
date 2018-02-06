@@ -14,11 +14,11 @@ CStBoard::CStBoard()
 // Clear
 void CStBoard::Clear()
 {
-	for (int x = 0; x < m_XSize; x++)
+	for (int nBoardY = 0; nBoardY < m_YSize; nBoardY++)
 	{
-		for (int y = 0; y < m_YSize; y++)
+		for (int nBoardX = 0; nBoardX < m_XSize; nBoardX++)
 		{
-			m_Board[x][y] = 0;
+			m_Board[nBoardY][nBoardX] = 0;
 		}
 	}
 }
@@ -38,11 +38,11 @@ int CStBoard::GetYSize()
 // Get value
 int CStBoard::GetValue(int nX, int nY)
 {
-    return m_Board[nX][nY];
+    return m_Board[nY][nX];
 }
 
 // Set value
 void CStBoard::SetValue(int nX, int nY, int nValue)
 {
-    m_Board[nX][nY] = nValue;
+    m_Board[nY][nX] = nValue;
 }

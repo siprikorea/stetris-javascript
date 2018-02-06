@@ -28,7 +28,7 @@ private:
     // Y Size
     int m_YSize;
     // Board
-    int m_Board[ST_MAX_BOARD_X][ST_MAX_BOARD_Y];
+    int m_Board[ST_MAX_BOARD_Y][ST_MAX_BOARD_X];
 };
 
 #endif

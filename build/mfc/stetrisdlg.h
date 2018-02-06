@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../stview.h"
-#include "../../../stplay.h"
+#include "../../src/stview.h"
+#include "../../src/stplay.h"
 
 class CSTetrisDlg : public CDialog, public CStView
 {
@@ -21,6 +21,12 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);
 	// On initalizing dialog
 	virtual BOOL OnInitDialog();
+	// PreTranslateMessage
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	// On OK
+	virtual void OnOK();
+	// On Cancel
+	virtual void OnCancel();
 	// On painting
 	afx_msg void OnPaint();
 	// On querying drag icon
@@ -37,9 +43,7 @@ protected:
 	// Draw board
 	void DrawBoard(CDC* pDC, CRect* pRect);
 	// Draw current block
-	void DrawCurrentBlock(CDC* pDC, CRect* pRect);
-	// Draw next block
-	void DrawNextBlock(CDC* pDC, CRect* pRect);
+	void DrawBlock(CDC* pDC, CRect* pRect, CStBlock* pBlock);
 	// Draw score
 	void DrawScore(CDC* pDC, CRect* pRect);
 

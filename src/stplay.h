@@ -4,12 +4,17 @@
 #include "stblock.h"
 #include "stboard.h"
 #include "stview.h"
+#include "thread/thread.h"
 
 class CStPlay
 {
 public:
     // Constructor
     CStPlay(CStView* pView);
+	// Play
+	static void Play(void* param);
+	// Play
+	void Play();
 
     // Move left
     void MoveLeft();
@@ -30,6 +35,13 @@ public:
 	CStBlock* GetNextBlock();
 
 private:
+	// Set block to board
+	void SetBlockToBoard();
+	// Clear complete line
+	void ClearCompleteLine();
+	// Change block
+	void ChangeBlock();
+
     // View
     CStView* m_pView;
     // Board
@@ -38,6 +50,8 @@ private:
     CStBlock m_CurrentBlock;
     // Next Block
     CStBlock m_NextBlock;
+	// Thread
+	ThreadObject* m_pThread;
 };
 
 #endif
