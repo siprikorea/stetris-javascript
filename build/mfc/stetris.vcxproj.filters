@@ -10,7 +10,7 @@
     <Filter Include="3.Presentation">
       <UniqueIdentifier>{61a1a839-a621-4b9b-a32f-4991cd0fe234}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3.Presentation\Resource">
+    <Filter Include="3.Presentation\resource">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
@@ -34,17 +34,17 @@
     <ClInclude Include="stdafx.h">
       <Filter>3.Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="STetris.h">
+    <ClInclude Include="stetris.h">
       <Filter>3.Presentation</Filter>
     </ClInclude>
-    <ClInclude Include="STetrisDlg.h">
+    <ClInclude Include="stetrisDlg.h">
       <Filter>3.Presentation</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>3.Presentation</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>3.Presentation\Resource</Filter>
+      <Filter>3.Presentation\resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,35 +66,35 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>3.Presentation</Filter>
     </ClCompile>
-    <ClCompile Include="STetris.cpp">
+    <ClCompile Include="stetris.cpp">
       <Filter>3.Presentation</Filter>
     </ClCompile>
-    <ClCompile Include="STetrisDlg.cpp">
+    <ClCompile Include="stetrisdlg.cpp">
       <Filter>3.Presentation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="STetris.rc">
-      <Filter>3.Presentation\Resource</Filter>
+    <ResourceCompile Include="stetris.rc">
+      <Filter>3.Presentation\resource</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\STetris.rc2">
-      <Filter>3.Presentation\Resource</Filter>
+    <None Include="res\stetris.rc2">
+      <Filter>3.Presentation\resource</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\STetris.ico">
-      <Filter>3.Presentation\Resource</Filter>
+    <Image Include="res\stetris.ico">
+      <Filter>3.Presentation\resource</Filter>
     </Image>
     <Image Include="res\stetris_block.bmp">
-      <Filter>3.Presentation\Resource</Filter>
+      <Filter>3.Presentation\resource</Filter>
     </Image>
     <Image Include="res\bitmap1.bmp">
-      <Filter>3.Presentation\Resource</Filter>
+      <Filter>3.Presentation\resource</Filter>
     </Image>
     <Image Include="res\stetris_background.jpg">
-      <Filter>3.Presentation\Resource</Filter>
+      <Filter>3.Presentation\resource</Filter>
     </Image>
   </ItemGroup>
 </Project>
