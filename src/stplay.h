@@ -11,10 +11,6 @@ class CStPlay
 public:
     // Constructor
     CStPlay(CStView* pView);
-	// Play
-	static void Play(void* param);
-	// Play
-	void Play();
 
     // Move left
     void MoveLeft();

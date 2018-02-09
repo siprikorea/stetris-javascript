@@ -11,10 +11,8 @@ class CStBlock
 {
 public:
     // Constructor
-    CStBlock();
+    CStBlock(CStBoard* pBoard);
 
-    // Set board
-    void SetBoard(CStBoard* pBoard);
     // Get type
     int GetType();
     // Get X size

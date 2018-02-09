@@ -1,36 +1,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include "stplay.h"
-#include "thread/thread.h"
 
 
 // Constructor
 CStPlay::CStPlay(CStView* pView)
+	: m_CurrentBlock(&m_Board),
+	m_NextBlock(&m_Board)
 {
     // View
     m_pView = pView;
-    // Set board
-    m_CurrentBlock.SetBoard(&m_Board);
-	// Thread
-	ThreadObject::New(CStPlay::Play, this, &m_pThread, "Play");
-}
-
-// Play
-void CStPlay::Play(void *pPlay)
-{
-	((CStPlay*)pPlay)->Play();
-}
-
-#include <Windows.h>
-
-// Play
-void CStPlay::Play()
-{
-	while (1)
-	{
-		Sleep(500);
-//		MoveDown();
-	}
 }
 
 // Move left
@@ -139,8 +118,10 @@ void CStPlay::ClearCompleteLine()
 	int nXSize = m_Board.GetXSize();
 	int nYSize = m_Board.GetYSize();
 
-	for (int nBoardY = nYSize; nBoardY >= 0; nBoardY--)
+	// Check if a line is completed on board
+	for (int nBoardY = nYSize -1; nBoardY >= 0; )
 	{
+		// Count block in one line
 		int nBlockCount = 0;
 		for (int nBoardX = 0; nBoardX < nXSize; nBoardX++)
 		{
@@ -150,9 +131,11 @@ void CStPlay::ClearCompleteLine()
 			}
 		}
 
-		if (nBlockCount == m_Board.GetXSize())
+		// If block is completed
+		if (nBlockCount == nXSize)
 		{
-			for (int nMoveBoardY = nBoardY; nMoveBoardY >= 0; nMoveBoardY--)
+			// Move blocks from complete block - 1 to first block
+			for (int nMoveBoardY = nBoardY; nMoveBoardY > 0; nMoveBoardY--)
 			{
 				for (int nBoardX = 0; nBoardX < nXSize; nBoardX++)
 				{
@@ -161,10 +144,17 @@ void CStPlay::ClearCompleteLine()
 				}
 			}
 
+			// Clear first line
 			for (int nBoardX = 0; nBoardX < nXSize; nBoardX++)
 			{
 				m_Board.SetValue(nBoardX, 0, 0);
 			}
+		}
+		// If block is not completed
+		else
+		{
+			// Check next line
+			nBoardY--;
 		}
 	}
 }
@@ -174,9 +164,7 @@ void CStPlay::ChangeBlock()
 {
 	// Set current block
 	m_CurrentBlock = m_NextBlock;
-	// Set board
-	m_CurrentBlock.SetBoard(&m_Board);
 	// Set next block
-	CStBlock nextBlock;
+	CStBlock nextBlock(&m_Board);
 	m_NextBlock = nextBlock;
 }

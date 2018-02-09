@@ -23,10 +23,8 @@ protected:
 	virtual BOOL OnInitDialog();
 	// PreTranslateMessage
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
-	// On OK
-	virtual void OnOK();
-	// On Cancel
-	virtual void OnCancel();
+	// On timer
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	// On painting
 	afx_msg void OnPaint();
 	// On querying drag icon

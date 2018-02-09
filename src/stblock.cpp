@@ -8,13 +8,12 @@
  *	@brief		Constructor
  *	@retval		Nothing
  ************************************************************/
-CStBlock::CStBlock()
+CStBlock::CStBlock(CStBoard* pBoard)
+	: m_pBoard(pBoard)
 {
     // Initialize random seed
     srand((unsigned int)time(NULL));
 
-    // Board
-    m_pBoard = NULL;
     // Type
     m_Type = (rand() % ST_MAX_BLOCK_CNT) + 1;
     // X Size
@@ -22,22 +21,13 @@ CStBlock::CStBlock()
     // Y Size
     m_YSize = g_StBlocks[m_Type-1].y_size;
     // X Position
-    m_XPos = 0;
+    m_XPos = (pBoard->GetXSize() / 2) - (m_XSize / 2);
     // Y Position
     m_YPos = 0;
     // Rotation
     m_Rotation = 0;
     // Block
     memcpy(m_Block, &g_StBlocks[m_Type-1].block[m_Rotation], sizeof(m_Block));
-}
-
-/************************************************************
- *	@brief		Set block
- *	@retval		Nothing
- ************************************************************/
-void CStBlock::SetBoard(CStBoard* pBoard)
-{
-    m_pBoard = pBoard;
 }
 
 /************************************************************
@@ -91,6 +81,12 @@ int CStBlock::GetYPos()
  ************************************************************/
 int CStBlock::GetBlock(int nX, int nY)
 {
+	if (nX < 0 || nX >= ST_MAX_BLOCK_X)
+		return 0;
+
+	if (nY < 0 || nY >= ST_MAX_BLOCK_Y)
+		return 0;
+
     return m_Block[nY][nX];
 }
 

@@ -27,6 +27,7 @@ BEGIN_MESSAGE_MAP(CSTetrisDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_KEYDOWN()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 /************************************************************
@@ -52,7 +53,7 @@ CSTetrisDlg::CSTetrisDlg(CWnd* pParent /*=NULL*/)
  ************************************************************/
 void CSTetrisDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+	__super::DoDataExchange(pDX);
 }
 
 /************************************************************
@@ -62,13 +63,17 @@ void CSTetrisDlg::DoDataExchange(CDataExchange* pDX)
  ************************************************************/
 BOOL CSTetrisDlg::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+	__super::OnInitDialog();
 
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hIcon, FALSE);
 
 	// Change dialog size
 	SetWindowPos(NULL, -1, -1, 1024, 760, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
+
+
+	// Set timer
+	SetTimer(0, 1000, NULL);
 
 	return TRUE;
 }
@@ -98,27 +103,26 @@ BOOL CSTetrisDlg::PreTranslateMessage(MSG* pMsg)
 		case VK_SPACE:
 			m_Play.Drop();
 			break;
+		case VK_RETURN:
+			return TRUE;
+		case VK_ESCAPE:
+			return TRUE;
 		}
 	}
 
-	return CDialog::PreTranslateMessage(pMsg);
+	return __super::PreTranslateMessage(pMsg);
 }
 
 /************************************************************
- *	@brief		On OK
+ *	@brief		On timer
  *	@retval		Nothing
  ************************************************************/
-void CSTetrisDlg::OnOK()
+void CSTetrisDlg::OnTimer(UINT_PTR nIDEvent)
 {
-}
+	// Move down
+	m_Play.MoveDown();
 
-/************************************************************
- *	@brief		On Cancel
- *	@retval		Nothing
- ************************************************************/
-void CSTetrisDlg::OnCancel()
-{
-	CDialog::OnCancel();
+	__super::OnTimer(nIDEvent);
 }
 
 /************************************************************
@@ -315,6 +319,7 @@ void CSTetrisDlg::DrawBlock(CDC* pDC, CRect* pRect, CStBlock* pBlock)
 		}
 	}
 }
+
 /************************************************************
  *	@brief		Draw score
  *	@param[in]	pDC				Device context
