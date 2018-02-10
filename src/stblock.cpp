@@ -102,8 +102,8 @@ bool CStBlock::Rotate()
     int TempBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X];
     memcpy(TempBlock, &g_StBlocks[m_Type-1].block[nTempRotation], sizeof(TempBlock));
 
-    // Check for movement
-    if (CheckForMovement(m_XPos, m_YPos, TempBlock))
+    // Check bounds
+    if (CheckBounds(m_XPos, m_YPos, TempBlock))
     {
         // Set current rotation
         m_Rotation = (m_Rotation + 1) % ST_MAX_BLOCK_ROT;
@@ -123,8 +123,8 @@ bool CStBlock::Rotate()
  ************************************************************/
 bool CStBlock::MoveLeft()
 {
-    // Check for movement
-    if (CheckForMovement(m_XPos - 1, m_YPos, m_Block))
+    // Check bounds
+    if (CheckBounds(m_XPos - 1, m_YPos, m_Block))
     {
         // Set current X position
         m_XPos = m_XPos - 1;
@@ -142,8 +142,8 @@ bool CStBlock::MoveLeft()
  ************************************************************/
 bool CStBlock::MoveRight()
 {
-    // Check for movement
-    if (CheckForMovement(m_XPos + 1, m_YPos, m_Block))
+    // Check bounds
+    if (CheckBounds(m_XPos + 1, m_YPos, m_Block))
     {
         // Set current X position
         m_XPos = m_XPos + 1;
@@ -161,8 +161,8 @@ bool CStBlock::MoveRight()
  ************************************************************/
 bool CStBlock::MoveDown()
 {
-    // Check for movement
-    if (CheckForMovement(m_XPos, m_YPos + 1, m_Block))
+    // Check bounds
+    if (CheckBounds(m_XPos, m_YPos + 1, m_Block))
     {
         // Set current Y position
         m_YPos = m_YPos + 1;
@@ -182,8 +182,8 @@ void CStBlock::Drop()
 {
     while (1)
     {
-        // Check for movement
-        if (CheckForMovement(m_XPos, m_YPos + 1, m_Block))
+        // Check bounds
+        if (CheckBounds(m_XPos, m_YPos + 1, m_Block))
         {
             // Set current Y position
             m_YPos = m_YPos + 1;
@@ -196,10 +196,10 @@ void CStBlock::Drop()
 }
 
 /************************************************************
- *	@brief		Check for movement
+ *	@brief		Check bounds
  *	@retval		Nothing
  ************************************************************/
-bool CStBlock::CheckForMovement(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X])
+bool CStBlock::CheckBounds(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X])
 {
     // Get board size
     int nBoardXSize = m_pBoard->GetXSize();

@@ -44,6 +44,9 @@ void CStPlay::MoveDown()
 		ChangeBlock();
     }
 
+	// Add score
+	m_Score.AddScore(10);
+
     // Update view
     m_pView->UpdateView();
 }
@@ -69,6 +72,9 @@ void CStPlay::Drop()
 	// Change block
 	ChangeBlock();
 
+	// Add score
+	m_Score.AddScore(100);
+
     // Update view
     m_pView->UpdateView();
 }
@@ -89,6 +95,12 @@ CStBlock* CStPlay::GetCurrentBlock()
 CStBlock* CStPlay::GetNextBlock()
 {
 	return &m_NextBlock;
+}
+
+// Get score
+CStScore* CStPlay::GetScore()
+{
+	return &m_Score;
 }
 
 // Set block to board
@@ -149,6 +161,9 @@ void CStPlay::ClearCompleteLine()
 			{
 				m_Board.SetValue(nBoardX, 0, 0);
 			}
+
+			// Add score
+			m_Score.AddScore(1000);
 		}
 		// If block is not completed
 		else

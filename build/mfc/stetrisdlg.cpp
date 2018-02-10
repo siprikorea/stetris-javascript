@@ -222,10 +222,6 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
  ************************************************************/
 void CSTetrisDlg::DrawBackground(CDC * pDC, CRect* pRect)
 {
-	// Get bitmap
-	BITMAP bmBackground;
-	m_BlockImages.GetBitmap(&bmBackground);
-
 	// Create memory DC
 	CDC MemDC;
 	MemDC.CreateCompatibleDC(pDC);
@@ -328,8 +324,20 @@ void CSTetrisDlg::DrawBlock(CDC* pDC, CRect* pRect, CStBlock* pBlock)
  ************************************************************/
 void CSTetrisDlg::DrawScore(CDC * pDC, CRect* pRect)
 {
-	CBrush brush(RGB(255, 255, 255));
-	pDC->FillRect(pRect, &brush);
+	// Set background mode
+	SetBkMode(*pDC, TRANSPARENT);
+	// Set text color
+	SetTextColor(*pDC, RGB(0, 255, 0));
+
+	// Set font
+	CFont font;
+	font.CreatePointFont(150, _T("Arial"), pDC);
+	pDC->SelectObject(font);
+
+	// Draw font
+	CString strScore;
+	strScore.Format(_T("%u"), m_Play.GetScore()->GetScore());
+	pDC->DrawText(strScore, pRect, DT_RIGHT | DT_VCENTER);
 }
 
 /************************************************************
@@ -338,5 +346,5 @@ void CSTetrisDlg::DrawScore(CDC * pDC, CRect* pRect)
  ************************************************************/
 void CSTetrisDlg::UpdateView()
 {
-	Invalidate();
+	Invalidate(FALSE);
 }

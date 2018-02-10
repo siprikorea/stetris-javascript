@@ -37,8 +37,8 @@ public:
     // Drop
     void Drop();
     
-    // Check for movement
-    bool CheckForMovement(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X]);
+    // Check bounds
+    bool CheckBounds(int nMoveX, int nMoveY, int MoveBlock[ST_MAX_BLOCK_Y][ST_MAX_BLOCK_X]);
 
 protected:
     // Board

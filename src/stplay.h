@@ -3,8 +3,8 @@
 
 #include "stblock.h"
 #include "stboard.h"
+#include "stscore.h"
 #include "stview.h"
-#include "thread/thread.h"
 
 class CStPlay
 {
@@ -29,6 +29,8 @@ public:
 	CStBlock* GetCurrentBlock();
 	// Get next block
 	CStBlock* GetNextBlock();
+	// Get score
+	CStScore* GetScore();
 
 private:
 	// Set block to board
@@ -46,8 +48,8 @@ private:
     CStBlock m_CurrentBlock;
     // Next Block
     CStBlock m_NextBlock;
-	// Thread
-	ThreadObject* m_pThread;
+	// Score
+	CStScore m_Score;
 };
 
 #endif

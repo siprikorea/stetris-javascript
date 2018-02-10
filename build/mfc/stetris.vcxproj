@@ -187,8 +187,8 @@
     <ClInclude Include="..\..\src\stblocks.h" />
     <ClInclude Include="..\..\src\stboard.h" />
     <ClInclude Include="..\..\src\stplay.h" />
+    <ClInclude Include="..\..\src\stscore.h" />
     <ClInclude Include="..\..\src\stview.h" />
-    <ClInclude Include="..\..\src\thread\thread.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stetris.h" />
@@ -200,8 +200,8 @@
     <ClCompile Include="..\..\src\stblocks.cpp" />
     <ClCompile Include="..\..\src\stboard.cpp" />
     <ClCompile Include="..\..\src\stplay.cpp" />
+    <ClCompile Include="..\..\src\stscore.cpp" />
     <ClCompile Include="..\..\src\stview.cpp" />
-    <ClCompile Include="..\..\src\thread\thread_win32.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

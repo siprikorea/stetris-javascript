@@ -14,9 +14,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="1.Model\thread">
-      <UniqueIdentifier>{20717617-5de4-42cb-8da8-4ecaddf750cd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -49,8 +46,8 @@
     <ClInclude Include="..\..\src\stplay.h">
       <Filter>1.Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\thread\thread.h">
-      <Filter>1.Model\thread</Filter>
+    <ClInclude Include="..\..\src\stscore.h">
+      <Filter>1.Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -78,8 +75,8 @@
     <ClCompile Include="..\..\src\stplay.cpp">
       <Filter>1.Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\thread\thread_win32.cpp">
-      <Filter>1.Model\thread</Filter>
+    <ClCompile Include="..\..\src\stscore.cpp">
+      <Filter>1.Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
