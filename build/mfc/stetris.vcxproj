@@ -193,6 +193,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stetris.h" />
     <ClInclude Include="stetrisdlg.h" />
+    <ClInclude Include="stmemdc.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +211,7 @@
     </ClCompile>
     <ClCompile Include="stetris.cpp" />
     <ClCompile Include="stetrisdlg.cpp" />
+    <ClCompile Include="stmemdc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="stetris.rc" />

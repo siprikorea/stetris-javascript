@@ -49,6 +49,9 @@
     <ClInclude Include="..\..\src\stscore.h">
       <Filter>1.Model</Filter>
     </ClInclude>
+    <ClInclude Include="stmemdc.h">
+      <Filter>3.Presentation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\stscore.cpp">
       <Filter>1.Model</Filter>
+    </ClCompile>
+    <ClCompile Include="stmemdc.cpp">
+      <Filter>3.Presentation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

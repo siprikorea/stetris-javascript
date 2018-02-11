@@ -1,6 +1,9 @@
 #include "stboard.h"
 
-// Constructor
+/************************************************************
+ *	@brief		Constructor
+ *	@retval		Nothing
+ ************************************************************/
 CStBoard::CStBoard()
 {
     // X Size
@@ -11,7 +14,10 @@ CStBoard::CStBoard()
     Clear();
 }
 
-// Clear
+/************************************************************
+ *	@brief		Clear
+ *	@retval		Nothing
+ ************************************************************/
 void CStBoard::Clear()
 {
 	for (int nBoardY = 0; nBoardY < m_YSize; nBoardY++)
@@ -23,19 +29,28 @@ void CStBoard::Clear()
 	}
 }
 
-// Get X size
+/************************************************************
+ *	@brief		Get X size
+ *	@retval		Nothing
+ ************************************************************/
 int CStBoard::GetXSize()
 {
     return m_XSize;
 }
 
-// Get Y size
+/************************************************************
+ *	@brief		Get Y size
+ *	@retval		Nothing
+ ************************************************************/
 int CStBoard::GetYSize()
 {
     return m_YSize;
 }
 
-// Get value
+/************************************************************
+ *	@brief		Get value
+ *	@retval		Nothing
+ ************************************************************/
 int CStBoard::GetValue(int nX, int nY)
 {
 	if (nX < 0 || nX >= ST_MAX_BOARD_X)
@@ -47,7 +62,10 @@ int CStBoard::GetValue(int nX, int nY)
     return m_Board[nY][nX];
 }
 
-// Set value
+/************************************************************
+ *	@brief		Set value
+ *	@retval		Nothing
+ ************************************************************/
 void CStBoard::SetValue(int nX, int nY, int nValue)
 {
 	if (nX < 0 || nX >= ST_MAX_BOARD_X)

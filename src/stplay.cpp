@@ -3,7 +3,10 @@
 #include "stplay.h"
 
 
-// Constructor
+/************************************************************
+ *	@brief		Constructor
+ *	@retval		Nothing
+ ************************************************************/
 CStPlay::CStPlay(CStView* pView)
 	: m_CurrentBlock(&m_Board),
 	m_NextBlock(&m_Board)
@@ -12,7 +15,10 @@ CStPlay::CStPlay(CStView* pView)
     m_pView = pView;
 }
 
-// Move left
+/************************************************************
+ *	@brief		Move left
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::MoveLeft()
 {
     // Move left
@@ -21,7 +27,10 @@ void CStPlay::MoveLeft()
     m_pView->UpdateView();
 }
 
-// Move right
+/************************************************************
+ *	@brief		Move right
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::MoveRight()
 {
     // Move right
@@ -30,7 +39,10 @@ void CStPlay::MoveRight()
     m_pView->UpdateView();
 }
 
-// Move down
+/************************************************************
+ *	@brief		Move down
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::MoveDown()
 {
     // Move down
@@ -51,7 +63,10 @@ void CStPlay::MoveDown()
     m_pView->UpdateView();
 }
 
-// Rotate
+/************************************************************
+ *	@brief		Rotate
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::Rotate()
 {
     // Rotate
@@ -60,7 +75,10 @@ void CStPlay::Rotate()
     m_pView->UpdateView();
 }
 
-// Drop
+/************************************************************
+ *	@brief		Drop
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::Drop()
 {
 	// Drop
@@ -79,31 +97,46 @@ void CStPlay::Drop()
     m_pView->UpdateView();
 }
 
-// Get board
+/************************************************************
+ *	@brief		Get board
+ *	@retval		Nothing
+ ************************************************************/
 CStBoard* CStPlay::GetBoard()
 {
 	return &m_Board;
 }
 
-// Get current block
+/************************************************************
+ *	@brief		Get current block
+ *	@retval		Nothing
+ ************************************************************/
 CStBlock* CStPlay::GetCurrentBlock()
 {
 	return &m_CurrentBlock;
 }
 
-// Get next block
+/************************************************************
+ *	@brief		Get next block
+ *	@retval		Nothing
+ ************************************************************/
 CStBlock* CStPlay::GetNextBlock()
 {
 	return &m_NextBlock;
 }
 
-// Get score
+/************************************************************
+ *	@brief		Get score
+ *	@retval		Nothing
+ ************************************************************/
 CStScore* CStPlay::GetScore()
 {
 	return &m_Score;
 }
 
-// Set block to board
+/************************************************************
+ *	@brief		Set block to board
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::SetBlockToBoard()
 {
 	// Get block size
@@ -123,7 +156,10 @@ void CStPlay::SetBlockToBoard()
 	}
 }
 
-// Clear complete line
+/************************************************************
+ *	@brief		Clear complete line
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::ClearCompleteLine()
 {
 	// Get board size
@@ -174,7 +210,10 @@ void CStPlay::ClearCompleteLine()
 	}
 }
 
-// Change block
+/************************************************************
+ *	@brief		Change block
+ *	@retval		Nothing
+ ************************************************************/
 void CStPlay::ChangeBlock()
 {
 	// Set current block

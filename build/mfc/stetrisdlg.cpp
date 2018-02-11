@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "stetris.h"
 #include "stetrisdlg.h"
+#include "stmemdc.h"
 #include "afxdialogex.h"
 #include <atlimage.h>
 
@@ -179,8 +180,7 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
 	GetClientRect(&rect);
 	
 	// Create memory DC
-	CDC MemDC;
-	MemDC.CreateCompatibleDC(pDC);
+	CStMemDC MemDC(pDC, &rect);
 
 	// Create memory bitmap
 	CBitmap MemBM;
@@ -209,9 +209,6 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
 	CRect scoreRect(CPoint(rect.left + ST_SCORE_POS_X, rect.top + ST_SCORE_POS_Y),
 		CSize(ST_BLOCK_WIDTH * 7, ST_BLOCK_HEIGHT * 2));
 	DrawScore(&MemDC, &scoreRect);
-
-	// Bitblt
-	pDC->BitBlt(0, 0, rect.Width(), rect.Height(), &MemDC, 0, 0, SRCCOPY);
 }
 
 /************************************************************
@@ -223,14 +220,10 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
 void CSTetrisDlg::DrawBackground(CDC * pDC, CRect* pRect)
 {
 	// Create memory DC
-	CDC MemDC;
-	MemDC.CreateCompatibleDC(pDC);
+	CStMemDC MemDC(pDC, pRect);
 	
 	// Select background
 	MemDC.SelectObject(&m_Background);
-
-	// Draw image
-	pDC->BitBlt(pRect->left, pRect->top, 1024, 768, &MemDC, 0, 0, SRCCOPY);
 }
 
 /************************************************************
