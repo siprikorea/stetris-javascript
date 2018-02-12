@@ -31,6 +31,8 @@ public:
 	CStBlock* GetNextBlock();
 	// Get score
 	CStScore* GetScore();
+	// Get high score
+	CStScore* GetHighScore();
 
 private:
 	// Set block to board
@@ -50,6 +52,8 @@ private:
     CStBlock m_NextBlock;
 	// Score
 	CStScore m_Score;
+	// High Score
+	CStScore m_HighScore;
 };
 
 #endif

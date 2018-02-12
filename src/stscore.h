@@ -1,9 +1,6 @@
 #ifndef __STSCORE_H__
 #define __STSCORE_H__
 
-#define ST_MAX_BOARD_X 10
-#define ST_MAX_BOARD_Y 20
-
 class CStScore
 {
 public:
@@ -12,8 +9,11 @@ public:
 
     // Clear
     void Clear();
+
 	// Add score
 	void AddScore(unsigned int dwScore);
+	// Set score
+	void SetScore(unsigned int dwScore);
 	// Get score
 	unsigned int GetScore();
 

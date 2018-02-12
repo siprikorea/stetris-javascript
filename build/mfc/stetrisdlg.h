@@ -23,6 +23,8 @@ protected:
 	virtual BOOL OnInitDialog();
 	// PreTranslateMessage
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	// On destroy
+	afx_msg void OnDestroy();
 	// On timer
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	// On painting
@@ -44,6 +46,8 @@ protected:
 	void DrawBlock(CDC* pDC, CRect* pRect, CStBlock* pBlock);
 	// Draw score
 	void DrawScore(CDC* pDC, CRect* pRect);
+	// Draw high score
+	void DrawHighScore(CDC* pDC, CRect* pRect);
 
 protected:
 	// Icon

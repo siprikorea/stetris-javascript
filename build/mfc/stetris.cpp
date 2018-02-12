@@ -31,6 +31,8 @@ BOOL CSTetrisApp::InitInstance()
 {
 	CWinApp::InitInstance();
 
+	SetRegistryKey(_T("siprikorea"));
+
 	CSTetrisDlg dlg;
 	dlg.DoModal();
 

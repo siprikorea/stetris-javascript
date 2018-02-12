@@ -18,17 +18,21 @@
 #define ST_BOARD_POS_X			400
 #define ST_BOARD_POS_Y			30
 
-#define ST_NEXT_BLOCK_POS_X		750
+#define ST_NEXT_BLOCK_POS_X		600
 #define ST_NEXT_BLOCK_POS_Y		150
 
 #define ST_SCORE_POS_X			750
 #define ST_SCORE_POS_Y			30
+
+#define ST_HIGHSCORE_POS_X		600
+#define ST_HIGHSCORE_POS_Y		30
 
 BEGIN_MESSAGE_MAP(CSTetrisDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_KEYDOWN()
 	ON_WM_TIMER()
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 /************************************************************
@@ -69,9 +73,12 @@ BOOL CSTetrisDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);
 	SetIcon(m_hIcon, FALSE);
 
+	// Load high score
+	int nHighScore = theApp.GetProfileInt(_T(""), _T("High Score"), 0);
+	m_Play.GetHighScore()->SetScore(nHighScore);
+
 	// Change dialog size
 	SetWindowPos(NULL, -1, -1, 1024, 760, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
-
 
 	// Set timer
 	SetTimer(0, 1000, NULL);
@@ -112,6 +119,20 @@ BOOL CSTetrisDlg::PreTranslateMessage(MSG* pMsg)
 	}
 
 	return __super::PreTranslateMessage(pMsg);
+}
+
+/************************************************************
+ *	@brief		On destroy
+ *	@retval		TRUE
+ *	@retval		FALSE
+ ************************************************************/
+void CSTetrisDlg::OnDestroy()
+{
+	// Save high score
+	int nHighScore = m_Play.GetHighScore()->GetScore();
+	theApp.WriteProfileInt(_T(""), _T("High Score"), nHighScore);
+
+	__super::OnDestroy();
 }
 
 /************************************************************
@@ -209,6 +230,11 @@ void CSTetrisDlg::DrawAll(CDC * pDC)
 	CRect scoreRect(CPoint(rect.left + ST_SCORE_POS_X, rect.top + ST_SCORE_POS_Y),
 		CSize(ST_BLOCK_WIDTH * 7, ST_BLOCK_HEIGHT * 2));
 	DrawScore(&MemDC, &scoreRect);
+
+	// Draw high score
+	CRect highScoreRect(CPoint(rect.left + ST_HIGHSCORE_POS_X, rect.top + ST_HIGHSCORE_POS_Y),
+		CSize(ST_BLOCK_WIDTH * 7, ST_BLOCK_HEIGHT * 2));
+	DrawHighScore(&MemDC, &highScoreRect);
 }
 
 /************************************************************
@@ -327,10 +353,44 @@ void CSTetrisDlg::DrawScore(CDC * pDC, CRect* pRect)
 	font.CreatePointFont(150, _T("Arial"), pDC);
 	pDC->SelectObject(font);
 
-	// Draw font
+	// Draw title
+	CRect titleRect(CPoint(pRect->left, pRect->top), CSize(pRect->Width(), pRect->Height() / 2));
+	pDC->DrawText(_T("SCORE"), &titleRect, DT_RIGHT | DT_VCENTER);
+
+	// Draw score
 	CString strScore;
 	strScore.Format(_T("%u"), m_Play.GetScore()->GetScore());
-	pDC->DrawText(strScore, pRect, DT_RIGHT | DT_VCENTER);
+	CRect scoreRect(CPoint(pRect->left, titleRect.bottom), CSize(pRect->Width(), pRect->Height() / 2));
+	pDC->DrawText(strScore, &scoreRect, DT_RIGHT | DT_VCENTER);
+}
+
+/************************************************************
+ *	@brief		Draw high score
+ *	@param[in]	pDC				Device context
+ *	@param[in]	pRect			Rectangle
+ *	@retval		Nothing
+ ************************************************************/
+void CSTetrisDlg::DrawHighScore(CDC * pDC, CRect* pRect)
+{
+	// Set background mode
+	SetBkMode(*pDC, TRANSPARENT);
+	// Set text color
+	SetTextColor(*pDC, RGB(0, 255, 0));
+
+	// Set font
+	CFont font;
+	font.CreatePointFont(150, _T("Arial"), pDC);
+	pDC->SelectObject(font);
+
+	// Draw title
+	CRect titleRect(CPoint(pRect->left, pRect->top), CSize(pRect->Width(), pRect->Height() / 2));
+	pDC->DrawText(_T("HIGH SCORE"), &titleRect, DT_RIGHT | DT_VCENTER);
+
+	// Draw high score
+	CString strHighScore;
+	strHighScore.Format(_T("%u"), m_Play.GetHighScore()->GetScore());
+	CRect highScoreRect(CPoint(pRect->left, titleRect.bottom), CSize(pRect->Width(), pRect->Height() / 2));
+	pDC->DrawText(strHighScore, &highScoreRect, DT_RIGHT | DT_VCENTER);
 }
 
 /************************************************************
@@ -341,3 +401,5 @@ void CSTetrisDlg::UpdateView()
 {
 	Invalidate(FALSE);
 }
+
+

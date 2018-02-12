@@ -29,6 +29,15 @@ void CStScore::AddScore(unsigned int dwScore)
 }
 
 /************************************************************
+ *	@brief		Set score
+ *	@retval		Nothing
+ ************************************************************/
+void CStScore::SetScore(unsigned int dwScore)
+{
+	m_dwScore = dwScore;
+}
+
+/************************************************************
  *	@brief		Get score
  *	@retval		Nothing
  ************************************************************/

@@ -102,9 +102,6 @@
     <Image Include="res\stetris_block.bmp">
       <Filter>3.Presentation\resource</Filter>
     </Image>
-    <Image Include="res\stetris_background.jpg">
-      <Filter>3.Presentation\resource</Filter>
-    </Image>
     <Image Include="res\stetris_background.bmp">
       <Filter>3.Presentation\resource</Filter>
     </Image>

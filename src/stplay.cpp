@@ -59,6 +59,10 @@ void CStPlay::MoveDown()
 	// Add score
 	m_Score.AddScore(10);
 
+	// Set high score
+	if (m_HighScore.GetScore() < m_Score.GetScore())
+		m_HighScore.SetScore(m_Score.GetScore());
+
     // Update view
     m_pView->UpdateView();
 }
@@ -92,6 +96,10 @@ void CStPlay::Drop()
 
 	// Add score
 	m_Score.AddScore(100);
+
+	// Set high score
+	if (m_HighScore.GetScore() < m_Score.GetScore())
+		m_HighScore.SetScore(m_Score.GetScore());
 
     // Update view
     m_pView->UpdateView();
@@ -131,6 +139,15 @@ CStBlock* CStPlay::GetNextBlock()
 CStScore* CStPlay::GetScore()
 {
 	return &m_Score;
+}
+
+/************************************************************
+ *	@brief		Get high score
+ *	@retval		Nothing
+ ************************************************************/
+CStScore* CStPlay::GetHighScore()
+{
+	return &m_HighScore;
 }
 
 /************************************************************
@@ -200,6 +217,10 @@ void CStPlay::ClearCompleteLine()
 
 			// Add score
 			m_Score.AddScore(1000);
+
+			// Set high score
+			if (m_HighScore.GetScore() < m_Score.GetScore())
+				m_HighScore.SetScore(m_Score.GetScore());
 		}
 		// If block is not completed
 		else
